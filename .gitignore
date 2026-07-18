@@ -1,0 +1,18 @@
+# Virtual Environment (Blocks massive third-party library files)
+venv/
+ENV/
+env/
+
+# Python caching mechanisms
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local Database (Prevents uploading your local test items)
+*.db
+*.sqlite3
+
+# Operating System temporary tracking files
+.DS_Store
+Thumbs.db

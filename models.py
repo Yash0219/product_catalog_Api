@@ -54,4 +54,3 @@ class Review(Base):
     # Handshakes pointing back to single parent variables
     user = relationship("User", back_populates="reviews")
     product = relationship("Product", back_populates="reviews")
-    

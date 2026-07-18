@@ -98,11 +98,11 @@ def create_product(product:schemas.ProductCreate,db:Session = Depends(get_db)):
 def read_all_products(db:Session = Depends(get_db)):
     return db.query(models.Product).all()   
 
-@app.get("/products/{product_id}/",response_model=schemas.ProductDetailResponse)
-def get_product(product_id:int , db:Session = Depends(get_db)):
-    product= db.query(models.Product).filter(models.Product.id == product_id).first()
+@app.get("/products/{product_id}/", response_model=schemas.ProductResponse)
+def read_product_detailed(product_id: int, db: Session = Depends(get_db)):
+    product = db.query(models.Product).filter(models.Product.id == product_id).first()
     if not product:
-        raise HTTPException(status_code=404, detail="product not found")
+        raise HTTPException(status_code=404, detail="Product not found")
     return product
 
 @app.post("/reviews/", response_model=schemas.ReviewResponse)
