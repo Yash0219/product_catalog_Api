@@ -1,9 +1,36 @@
 import streamlit as st
 import requests
+import subprocess
+import time
+import sys
+import os
+
+
+@st.cache_resource
+def launch_production_backend():
+    
+    env = os.environ.copy()
+    env["PYTHONPATH"] = os.getcwd()
+    
+    
+    backend_process = subprocess.Popen(
+        [sys.executable, "-m", "uvicorn", "main:app", "--host", "127.0.0.1", "--port", "8000"],
+        env=env
+    )
+    
+   
+    time.sleep(5)
+    return backend_process
+
+
+launch_production_backend()
+
 
 BACKEND_URL = "http://127.0.0.1:8000"
+# ==========================================
 
 st.set_page_config(page_title="E-commerce Catalog Dashboard", layout="wide")
+
 
 st.title("🛍️ E-commerce Product Management Dashboard")
 st.write("A full-stack relational database catalog designed with FastAPI & Streamlit.")
@@ -43,9 +70,7 @@ try:
 except Exception:
     pass
 
-# ==========================================
-# MAIN INTERACTIVE SURFACE
-# ==========================================
+
 tab1, tab2, tab3 = st.tabs(["🏗️ Data Orchestration", "🛒 Live Catalog & Reviews", "❌ Safe Deletion Manager"])
 
 with tab1:
