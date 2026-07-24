@@ -1,5 +1,5 @@
 from typing import Optional
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, EmailStr
 
 # category schema
 class CategoryBase(BaseModel):
@@ -18,7 +18,7 @@ class CategoryResponse(CategoryBase):
 # user schema
 class UserBase(BaseModel):
     username: str
-    email: str
+    email: EmailStr
 
 
 class UserCreate(UserBase):
