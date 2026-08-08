@@ -4,6 +4,7 @@ ENV/
 env/
 
 # Python caching mechanisms
+.env
 __pycache__/
 *.pyc
 *.pyo

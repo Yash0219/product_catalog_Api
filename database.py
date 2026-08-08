@@ -1,9 +1,14 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy.orm import sessionmaker, declarative_base
+import os
+from dotenv import load_dotenv
 
-engine = create_engine ("sqlite:///Catalog.db",connect_args={"check_same_thread":False})
-SessionLocal = sessionmaker(autocommit =False ,autoflush=False,bind=engine)
+load_dotenv() 
 
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+engine = create_engine(DATABASE_URL)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 def get_db():
@@ -11,5 +16,5 @@ def get_db():
     try:
         yield db
     finally:
-        db.close()    
+        db.close()
  
